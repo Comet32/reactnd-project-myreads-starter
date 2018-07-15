@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 /** 
- This course is not designed to teach Test Driven Development. 
- Feel free to use this file to test your application, but it 
- is not required.
+ 该课程并不教授测试驱动开发。 
+ 虽然不是必需要求，但你可以使用此文件来测试应用程序。 
 **/
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
   ReactDOM.render(<App />, div)
 })
-
-

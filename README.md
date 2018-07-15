@@ -1,92 +1,89 @@
-# MyReads Project
+# MyReads 项目
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+这是 Udacity 的 React 基础课程最终评估项目的初始模板。 此模板的目标是通过提供可能使用的 CSS 和 HTML 标记的静态示例来节省你的时间，但没有任何完成项目所需的 React 代码。 如果你选择从此模板开始，你的工作将是通过重构此模板中的静态代码为应用程序添加交互。
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+当然，如果你愿意，你可以从头开始这个项目！ 只需确保使用[Create React App](https://github.com/facebookincubator/create-react-app)来引导项目。
 
 ## TL;DR
 
-To get started developing right away:
+立即开始:
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+- 使用 `npm install` 安装所有项目依赖项
+- 使用 `npm start` 启动开发服务器
 
-## What You're Getting
+## 你会看到
+
 ```bash
-├── CONTRIBUTING.md
-├── README.md - This file.
-├── SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
-├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
+├── README.md - 该文件。
+├── SEARCH_TERMS.md # 可用于搜索字词的白名单简短集合，可以和你的应用程序一起使用。
+├── package.json # 你不太可能需要修改 npm 包管理器文件。
 ├── public
-│   ├── favicon.ico # React Icon, You may change if you wish.
-│   └── index.html # DO NOT MODIFY
+│   ├── favicon.ico # 如果你愿意，可以随意修改 React 图标。
+│   └── index.html # 不用修改
 └── src
-    ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app. Contains static HTML right now.
-    ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
-    ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── icons # Helpful images for your app. Use at your discretion.
+    ├── App.css # 请随意为你的 APP 定制个性化风格.
+    ├── App.js # 这是你的应用程序的根。现在包含静态HTML。
+    ├── App.test.js # 用于测试。提供 Create React 应用程序。鼓励测试，但不是强制要求。
+
+    ├── BooksAPI.js # 提供的Udacity后端的JavaScript API。 方法说明如下。
+    ├── icons # 你的应用程序的有用图片. 请酌情使用.
     │   ├── add.svg
     │   ├── arrow-back.svg
     │   └── arrow-drop-down.svg
-    ├── index.css # Global styles. You probably won't need to change anything here.
-    └── index.js # You should not need to modify this file. It is used for DOM rendering only.
+    ├── index.css # 通用风格。你可能不需要作出任何更改。
+    └── index.js # 你不需要修改此文件。 它仅用于DOM渲染。
 ```
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+请记住，良好的 React 设计实践是为每个组件创建新的 JS 文件，并使用 import / require 语句将它们包含在需要的位置。
 
-## Backend Server
+## 后台服务器
 
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+为了简化开发过程，我们提供了一个后台服务器供你开发。 提供的文件[`BooksAPI.js`](src/BooksAPI.js) 包含你需要在后端执行必要操作的方法：
 
-* [`getAll`](#getall)
-* [`update`](#update)
-* [`search`](#search)
+- [`getAll`](#getall)
+- [`update`](#update)
+- [`search`](#search)
 
 ### `getAll`
 
-Method Signature:
+方法签名:
 
 ```js
 getAll()
 ```
 
-* Returns a Promise which resolves to a JSON object containing a collection of book objects.
-* This collection represents the books currently in the bookshelves in your app.
+- 返回一个 Promise，它解析成一个包含 book 对象集合的 JSON 对象。
+- 此集合代表了你的应用程序中书架中的图书。
 
-### `update`
+### `更新`
 
-Method Signature:
+方法签名:
 
 ```js
 update(book, shelf)
 ```
 
-* book: `<Object>` containing at minimum an `id` attribute
-* shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
-* Returns a Promise which resolves to a JSON object containing the response data of the POST request
+- 书: `<Object>` 包含至少一个 `id` 属性
+- 书架: `<String>` 包含 ["wantToRead", "currentlyReading", "read"] 其中之一
+- 返回一个 Promise，它解析为包含 POST 请求的响应数据的 JSON 对象
 
-### `search`
+### `搜索`
 
-Method Signature:
+方法签名:
 
 ```js
-search(query)
+search(query, maxResults)
 ```
 
-* query: `<String>`
-* Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
-* These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
+- query: `<String>`
+- maxResults: `<Integer>` 由于后端服务器的性质，即使设置了较高数值，搜索结果的上限也为 20。
+- 返回一个 Promise，它解析成一个包含 book 对象集合的 JSON 对象。
+- 这些书不知道他们的书架。 它们只是原始结果。 在搜索页面上，你需要确保书籍具备正确的状态。
 
-## Important
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
+## 重要提示
 
-## Create React App
+后端 API 使用一组固定的缓存搜索结果，仅限于一组特定的搜索字词，可以在[SEARCH_TERMS.md](SEARCH_TERMS.md)中找到。 这个术语列表是与后端一起使用的*only*术语，所以如果你对“Basket Weaving”或“Bubble Wrap”的搜索没有任何结果返回，请不用惊讶。
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+## 构建 React 应用程序
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+该项目由 [Create React App](https://github.com/facebookincubator/create-react-app) 引导. 你可以在 [在这里](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md)找到有关如何执行常见任务的更多信息。
