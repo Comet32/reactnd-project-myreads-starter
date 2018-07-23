@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
-import escapeRegExp from 'escape-string-regexp'
 
 class SearchPage extends Component {
   state = {
@@ -12,7 +11,11 @@ class SearchPage extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to="/">
+          <Link
+            className="close-search"
+            onClick={this.props.onCleanSearch}
+            to="/"
+          >
             Close
           </Link>
           <div className="search-books-input-wrapper">
@@ -35,11 +38,7 @@ class SearchPage extends Component {
             {this.props.books &&
               this.props.books.map((book, i) => (
                 <Book
-                  url={
-                    book.imageLinks
-                      ? book.imageLinks.smallThumbnail
-                      : 'https://img1.doubanio.com/view/subject/l/public/s3941778.jpg'
-                  }
+                  url={book.imageLinks ? book.imageLinks.smallThumbnail : ''}
                   title={book.title}
                   author={book.authors}
                   shelf={book.shelf}

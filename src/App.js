@@ -30,9 +30,7 @@ class BooksApp extends React.Component {
     this.setState(state => ({
       books: state.books.map(b => {
         if (b.id === book.id) {
-          console.log(b.shelf)
           b.shelf = v
-          console.log(b.shelf)
         }
         return b
       })
@@ -41,14 +39,8 @@ class BooksApp extends React.Component {
     // 搜索页面添加到本地数据
     let b = this.state.books
     // 判断书架中是否有这本书，没有才添加，有的话 只是改变其在书架中的位置
-    let hasThisBook = false
-    for (let l of b) {
-      if (l.id === book.id) {
-        hasThisBook = true
-        break
-      }
-    }
-    console.log(hasThisBook)
+    // 使用 includes 方法
+    let hasThisBook = b.map(b => b.id).includes(book.id)
 
     if (!hasThisBook) {
       b.push(book)
@@ -64,7 +56,6 @@ class BooksApp extends React.Component {
   handlerSearch = query => {
     BooksAPI.search(query).then(books => {
       //如果搜索获得的结果没有书籍则清空页面中的书籍
-
       // 为搜索出来的书匹配书架上的书，并为其添加书架属性，这样便可以同步显示其书架信息
       if (books && books.length) {
         this.setState(state => ({
@@ -72,13 +63,13 @@ class BooksApp extends React.Component {
             for (let b of state.books) {
               if (book.id === b.id) {
                 book.shelf = b.shelf
-                return book
               }
             }
             return book
           }),
           isHint: false
         }))
+        console.log(books)
       } else {
         // 如果返回的数据不是伪数组则清空页面中的书籍，并提醒能够搜索的关键字
         this.setState({
@@ -113,6 +104,11 @@ class BooksApp extends React.Component {
                 this.changeShelf(e, book)
                 history.push('/')
                 // 清除 search 页面中的书籍
+                this.setState({
+                  searchBooks: []
+                })
+              }}
+              onCleanSearch={() => {
                 this.setState({
                   searchBooks: []
                 })
