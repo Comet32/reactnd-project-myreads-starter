@@ -1,12 +1,12 @@
 import React from 'react'
 import Book from './Book'
 
-let BookShelf = props => (
+let BookShelf = ({ books, onChangeShelf, shelfTitle }) => (
   <div className="bookshelf">
-    <h2 className="bookshelf-title">{props.shelfTitle}</h2>
+    <h2 className="bookshelf-title">{shelfTitle}</h2>
     <div className="bookshelf-books">
       <ol className="books-grid">
-        {props.books.map((book, i) => (
+        {books.map((book, i) => (
           <Book
             url={book.imageLinks ? book.imageLinks.smallThumbnail : ''}
             title={book.title}
@@ -14,7 +14,7 @@ let BookShelf = props => (
             shelf={book.shelf}
             book={book}
             key={i}
-            onChangeShelf={props.onChangeShelf}
+            onChangeShelf={onChangeShelf}
           />
         ))}
       </ol>

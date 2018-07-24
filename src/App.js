@@ -88,7 +88,6 @@ class BooksApp extends React.Component {
           path="/"
           render={() => (
             <BookListPage
-              showSearchPage={() => this.setState({ showSearchPage: 'search' })}
               onChangeShelf={this.changeShelf}
               books={this.state.books}
             />

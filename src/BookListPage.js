@@ -2,9 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
-let BookListPage = props => {
-  const { books } = props
-
+const BookListPage = ({ books, onChangeShelf }) => {
   // 将 books 对象数组中对象根据其 shelf 值进行分组
   let currentlyReadingbooks = books.filter(
       book => book.shelf === 'currentlyReading'
@@ -31,7 +29,7 @@ let BookListPage = props => {
               <BookShelf
                 shelfTitle={item.shelfTitle}
                 books={item.shelfBooks}
-                onChangeShelf={props.onChangeShelf}
+                onChangeShelf={onChangeShelf}
                 key={i}
               />
             ))}
