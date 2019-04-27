@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Book from './Book'
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import Book from "./Book"
+import { CSSTransition } from "react-transition-group"
 
 class SearchPage extends Component {
   state = {
-    query: ''
+    query: ""
   }
 
   render() {
@@ -37,15 +38,22 @@ class SearchPage extends Component {
           <ol className="books-grid">
             {this.props.books &&
               this.props.books.map((book, i) => (
-                <Book
-                  url={book.imageLinks ? book.imageLinks.smallThumbnail : ''}
-                  title={book.title}
-                  author={book.authors}
-                  shelf={book.shelf}
-                  book={book}
+                <CSSTransition
+                  timeout={300}
+                  classNames="alert"
+                  in={true}
                   key={i}
-                  onChangeShelf={this.props.onChangeShelf}
-                />
+                >
+                  <Book
+                    url={book.imageLinks ? book.imageLinks.smallThumbnail : ""}
+                    title={book.title}
+                    author={book.authors}
+                    shelf={book.shelf}
+                    book={book}
+                    key={i}
+                    onChangeShelf={this.props.onChangeShelf}
+                  />
+                </CSSTransition>
               ))}
           </ol>
           {this.props.isHint && (
