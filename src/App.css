@@ -197,6 +197,7 @@ body,
   font-size: 33px;
 }
 
+/* alert 动画 */
 .alert-enter {
   opacity: 0;
   transform: scale(0.9);
@@ -210,6 +211,29 @@ body,
   opacity: 1;
 }
 .alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* page 动画 */
+.page-enter {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-exit-active {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;

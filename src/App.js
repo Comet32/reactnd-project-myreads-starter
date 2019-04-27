@@ -1,9 +1,10 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
-import BookListPage from './BookListPage'
-import SearchPage from './SearchPage'
-import { Route } from 'react-router-dom'
+import React from "react"
+import * as BooksAPI from "./BooksAPI"
+import "./App.css"
+import BookListPage from "./BookListPage"
+import SearchPage from "./SearchPage"
+import { Route } from "react-router-dom"
+import { CSSTransition } from "react-transition-group"
 
 class BooksApp extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class BooksApp extends React.Component {
       this.setState({
         books
       })
-      console.log('componentDidMount:', books)
+      console.log("componentDidMount:", books)
     })
   }
 
@@ -87,34 +88,38 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <BookListPage
-              onChangeShelf={this.changeShelf}
-              books={this.state.books}
-            />
+            <CSSTransition timeout={300} classNames="page" in={true}>
+              <BookListPage
+                onChangeShelf={this.changeShelf}
+                books={this.state.books}
+              />
+            </CSSTransition>
           )}
         />
         <Route
           exact
           path="/search"
           render={({ history }) => (
-            <SearchPage
-              onSearch={this.handlerSearch}
-              onChangeShelf={(e, book) => {
-                this.changeShelf(e, book)
-                history.push('/')
-                // 清除 search 页面中的书籍
-                this.setState({
-                  searchBooks: []
-                })
-              }}
-              onCleanSearch={() => {
-                this.setState({
-                  searchBooks: []
-                })
-              }}
-              books={this.state.searchBooks}
-              isHint={this.state.isHint}
-            />
+            <CSSTransition timeout={300} classNames="page" in={true}>
+              <SearchPage
+                onSearch={this.handlerSearch}
+                onChangeShelf={(e, book) => {
+                  this.changeShelf(e, book)
+                  history.push("/")
+                  // 清除 search 页面中的书籍
+                  this.setState({
+                    searchBooks: []
+                  })
+                }}
+                onCleanSearch={() => {
+                  this.setState({
+                    searchBooks: []
+                  })
+                }}
+                books={this.state.searchBooks}
+                isHint={this.state.isHint}
+              />
+            </CSSTransition>
           )}
         />
       </div>
