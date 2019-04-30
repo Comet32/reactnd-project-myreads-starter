@@ -1,8 +1,8 @@
 import React from "react"
 import * as BooksAPI from "./BooksAPI"
 import "./App.css"
-import BookListPage from "./BookListPage"
-import SearchPage from "./SearchPage"
+import BookListPage from "./pages/BookListPage"
+import SearchPage from "./pages/SearchPage"
 import { Route } from "react-router-dom"
 import { CSSTransition } from "react-transition-group"
 
@@ -19,7 +19,6 @@ class BooksApp extends React.Component {
       this.setState({
         books
       })
-      console.log("componentDidMount:", books)
     })
   }
 
@@ -40,24 +39,24 @@ class BooksApp extends React.Component {
     // 搜索页面添加到本地数据
     let b = this.state.books
     // 判断书架中是否有这本书，没有才添加，有的话 只是改变其在书架中的位置
-    // 使用 includes 方法
+    // 使用 includes 方法判断是否已经存在这本书
     let hasThisBook = b.map(b => b.id).includes(book.id)
 
     if (!hasThisBook) {
-      b.push(book)
+      b.cancat(book)
       this.setState({
         books: b
       })
     }
 
     // 在服务器更新书的书架信息
-    BooksAPI.update(book, v).then()
+    BooksAPI.update(book, v)
   }
 
   handlerSearch = query => {
     BooksAPI.search(query).then(books => {
-      //如果搜索获得的结果没有书籍则清空页面中的书籍
-      // 为搜索出来的书匹配书架上的书，并为其添加书架属性，这样便可以同步显示其书架信息
+      debugger
+      // 如果搜索获得的结果有书籍则为搜索出来的书匹配书架上的书，并为其添加书架属性，这样便可以同步显示其书架信息
       if (books && books.length) {
         this.setState(state => ({
           searchBooks: books.map(book => {
@@ -70,9 +69,8 @@ class BooksApp extends React.Component {
           }),
           isHint: false
         }))
-        console.log(books)
+        // 如果返回的数据中没有数据，则提醒能够搜索的关键字
       } else {
-        // 如果返回的数据不是伪数组则清空页面中的书籍，并提醒能够搜索的关键字
         this.setState({
           searchBooks: [],
           isHint: true

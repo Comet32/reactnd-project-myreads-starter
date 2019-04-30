@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import Book from "./Book"
+import Book from "../components/Book"
 import { CSSTransition } from "react-transition-group"
 
 class SearchPage extends Component {
@@ -58,7 +58,7 @@ class SearchPage extends Component {
           </ol>
           {this.props.isHint && (
             <div className="search-hint">
-              <h1>提示信息</h1>
+              <h1>提示</h1>
               <h3>
                 您所使用的关键字搜索的信息缺失，请使用以下关键字进行搜索：
               </h3>

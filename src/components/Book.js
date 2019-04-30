@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 let Book = ({ url, book, shelf, title, author, onChangeShelf }) => (
   <li>
@@ -17,7 +17,7 @@ let Book = ({ url, book, shelf, title, author, onChangeShelf }) => (
             onChange={e => {
               onChangeShelf(e, book)
             }}
-            value={shelf ? shelf : 'none'}
+            value={shelf ? shelf : "none"}
           >
             <option value="move" disabled>
               Move to...
@@ -30,7 +30,9 @@ let Book = ({ url, book, shelf, title, author, onChangeShelf }) => (
         </div>
       </div>
       <div className="book-title">{title}</div>
-      <div className="book-authors">{author}</div>
+      {author && author.map(name => (
+        <div className="book-authors" key={name}>{name}</div>
+      ))}
     </div>
   </li>
 )
